@@ -1,0 +1,222 @@
+components:
+  schemas:
+    place-create:
+      type: object
+      properties:
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+      example:
+        name: "My Home"
+        city: "Curitiba"
+        state: "Paraná" 
+    place-create-response:
+      type: object
+      properties:
+        id: 
+          type: string
+        name:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      example:
+        id: "966f86bd-f573-4630-bad7-6410786f0ea0"
+        name: "My Home"
+        city: "Curitiba"
+        state: "Paraná" 
+        createdAt: "2024-07-13T19:54:56.126Z"
+        updatedAt: "2024-07-13T19:54:56.126Z"
+    place-search-response:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id: 
+                type: string
+              name:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              createdAt:
+                type: string
+              updatedAt:
+                type: string
+        count:
+          type: number
+        take:
+          type: number
+        page:
+          type: string
+        orderBy:
+          type: string
+        orderType:
+          type: string
+        search:
+          type: string
+      example:
+        results:
+          - id: "966f86bd-f573-4630-bad7-6410786f0ea0"
+            name: "My Home"
+            city: "Curitiba"
+            state: "Paraná" 
+            createdAt: "2024-07-13T19:54:56.126Z"
+            updatedAt: "2024-07-13T19:54:56.126Z"
+        count: 1
+        take: 5
+        page: "2"
+        orderBy: null
+        orderType: "asc"
+        search: null
+
+paths:
+  /place:
+    post:
+      summary: Cria um Lugar.
+      tags: [Place]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/place-create'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/place-create-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+  /place/{id}:
+    get:
+      summary: Pega um Lugar.
+      tags: [Place]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/place-create-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+    delete:
+      summary: deleta um Lugar.
+      tags: [Place]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/place-create-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+    patch:
+      summary: Cria um Lugar.
+      tags: [Place]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/place-create'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/place-create-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+  /place/search:
+    get:
+      summary: Pega uma lista paginada de Lugares.
+      tags: [Place]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+        - in: query
+          name: orderBy
+          schema: 
+            type: string
+            enum: [asc, desc]
+        - in: query
+          name: orderType
+          schema: 
+            type: string
+            enum: [createdAt, updatedAt, name, name, state]
+        - in: query
+          name: search
+          schema: 
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/place-search-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"

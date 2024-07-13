@@ -8,7 +8,7 @@ export class updateUserDto implements Prisma.UserUpdateInput{
   name?: string | Prisma.StringFieldUpdateOperationsInput;
   @JoiSchema(Joi.string().optional())
   newPassword?: string | Prisma.StringFieldUpdateOperationsInput;
-  @JoiSchema(Joi.string().required())
+  @JoiSchema(Joi.string().required()) 
   passwordConfirm?: string | Prisma.StringFieldUpdateOperationsInput;
 
   constructor(args: Prisma.UserUpdateInput){

@@ -6,7 +6,7 @@ import { updateUserDto } from './dto/update-user-dto';
 
 @Controller('user')
 export class UserController {
-  constructor(
+  constructor( 
     private readonly userService: UserService
   ) {}
 
@@ -17,7 +17,7 @@ export class UserController {
   }
 
   @Delete()
-  async delete(@Req() req: Request){
+  async delete(@Req() req: Request){ 
     return await this.userService.delete(req["user"].id);
   }
 

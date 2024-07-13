@@ -1,0 +1,50 @@
+components:
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+      example:
+        email: "emailtest@gmail.com"
+        password: "secretpassword"
+    login-response: 
+      type: object
+      properties:
+        access_token: 
+          type: string
+      example:
+        access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsIm5hbWUiOiJmdWxhbm8iLCJpYXQiOjE3MTQ0OTA1MzksImV4cCI6MTcxNDU3NjkzOX0.usyhNPlfeCiQg1y9LFgXqKrSfJlQmSo3TINswUbRQKg"
+
+paths:
+  /auth/login:
+    post:
+      summary: Realiza o login de um usuário.
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/login-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"

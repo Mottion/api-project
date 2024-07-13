@@ -1,0 +1,142 @@
+components:
+  schemas:
+    user-create:
+      type: object
+      properties:
+        name:
+          type: string
+          required: true
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+      example:
+        name: "user test 1"
+        email: "emailtest@gmail.com"
+        password: "secretpassword"
+    user-create-response: 
+      type: object
+      properties:
+        access_token: 
+          type: string
+      example:
+        access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsIm5hbWUiOiJmdWxhbm8iLCJpYXQiOjE3MTQ0OTA1MzksImV4cCI6MTcxNDU3NjkzOX0.usyhNPlfeCiQg1y9LFgXqKrSfJlQmSo3TINswUbRQKg"
+    user-update:
+      type: object
+      properties:
+        name:
+          type: string
+          required: false
+        newPassword:
+          type: string
+          required: false
+        passwordConfirm:
+          type: string
+          required: true
+      example:
+        name: "user test 1"
+        newPassword: "newsecretpassword"
+        passwordConfirm: "secretpassword"
+    user-update-response: 
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+      example:
+        id: 2
+        name: "fulano"
+        email: "fulaninho2@gmail.com"
+    user-delete-response: 
+      type: object
+      properties:
+        id:
+          type: string
+      example:
+        id: 2
+
+paths:
+  /user:
+    post:
+      summary: Cria um usuário.
+      tags: [User]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-create'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-create-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+    patch:
+      summary: Atualiza um usuario.
+      tags: [User]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user-update'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-update-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+    delete:
+      summary: Deleta um usuário.
+      security:
+        - bearerAuth: []
+      tags: [User]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-delete-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"
+    get:
+      summary: Pega dados do usuário.
+      security:
+        - bearerAuth: []
+      tags: [User]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user-update-response'
+        '400':
+          content:
+            application/json:
+              example:
+                status: 400
+                message: "error message example"

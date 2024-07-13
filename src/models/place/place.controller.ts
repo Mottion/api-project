@@ -8,7 +8,7 @@ import { UpdatePlaceDto } from './dto/update-place.dto';
 export class PlaceController {
   constructor(
     private readonly placeService: PlaceService
-  ) {}
+  ) {} 
 
   @Post()
   async create(@Body() body: CreatePlaceDto){
