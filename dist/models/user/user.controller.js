@@ -32,7 +32,6 @@ let UserController = class UserController {
         return await this.userService.update(req["user"].id, body);
     }
     async getMyUser(req) {
-        console.log("🚀 ~ UserController ~ getMyUser ~ req[]:", req["user"]);
         return await this.userService.getMyUser(req["user"]);
     }
 };

@@ -11,6 +11,21 @@ services:
       - challenge:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  
+  api-project:
+    container_name: "api-project"
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    environment:
+      DATABASE_URL: postgresql://postgres:challenge123@challenge:5432/challenge?schema=public
+      JWT_SECRET_CONSTANT: 2dd00bd77e0222ced882665481a9c1d9f907309d16e05ed007a1ea63928477a9
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
 
 volumes:
-  challenge: 
+  challenge:
