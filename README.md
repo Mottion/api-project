@@ -57,6 +57,9 @@ $ npx prisma generate
 $ npm run test
 ```
 
+## Paths
+You can access and test all routes through Swagger via the URL: [http://localhost:3000/swagger/](http://localhost:3000/swagger/)
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
