@@ -28,7 +28,6 @@ export class UserController {
 
   @Get()
   async getMyUser(@Req() req: Request){
-    console.log("🚀 ~ UserController ~ getMyUser ~ req[]:", req["user"])
     return await this.userService.getMyUser(req["user"])
   }
 

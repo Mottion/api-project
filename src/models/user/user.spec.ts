@@ -32,7 +32,9 @@ describe('User:', () => {
 
   afterAll(async () => {
     await app.close();
+    await cleanDB(prisma);
   });
+  
   describe('POST /user', () => {
     test("Should return 201 and create a user", async () => {
       const user = fakeUser()
