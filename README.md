@@ -22,51 +22,40 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Prerequisites
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Docker](https://www.docker.com/) in LTS version.
+[Node](https://nodejs.org/en) in LTS version.
 
 ## Installation
-
+Run at the root of the project:
 ```bash
 $ npm install
 ```
 
 ## Running the app
+  1. Create a .env file in the project root to run unit tests:
+ ```.env
+DATABASE_URL="postgresql://postgres:challenge123@localhost:5432/challenge?schema=public"
+JWT_SECRET_CONSTANT="2dd00bd77e0222ced882665481a9c1d9f907309d16e05ed007a1ea63928477a9"
+ ```
+2. Run the command:
 
 ```bash
-# development
-$ npm run start
+# if you are using linux
+$ sudo docker compose up
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# if you are using windows
+$ docker compose up
 ```
 
 ## Test
-
+obs: To run the commands below, first run the docker containers.
 ```bash
 # unit tests
+$ npx prisma generate
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
